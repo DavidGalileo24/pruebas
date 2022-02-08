@@ -1,38 +1,147 @@
-.App {
-  text-align: center;
+/*Variables*/
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*Login*/
+.formLogin{
+  margin-top: 150px;
+  padding: 25px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.backLogin .imgLogin1{
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  max-height: 100vh;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.imgLogo{
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+.lista{
+  list-style: none;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+ 
+}
+.listaItem{
+  margin: 10px;
+}
+.alink{
+  text-decoration: none;
+  color: rgb(9, 9, 83);
 }
 
-.App-link {
-  color: #61dafb;
+
+
+/*Navbar*/
+.btnCerrarSesion{
+  font-size: 1.5em;
+}
+.btnCerrarSesion:hover{
+  cursor: pointer;
+}
+.imgLogoNav{
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+.avatarDash{
+  width: 35px;
+  height: 35px;
+}
+.btnCerrarSesion{
+  display: block;
+  margin: 0 auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/*Dashboard*/
+.cardDash{
+  border: 1px solid black;
+  border-radius: 7px;
+  padding: 10px;
+  width: 32%;
+  margin: 7px;
+  float: left;
+}
+
+
+
+
+
+
+
+
+/*Breakpoints móviles*/
+@media (min-width: 600px) and (max-width: 991.98px){
+
+  .containerForm{
+      background-color: white;
   }
-  to {
-    transform: rotate(360deg);
+  .formLogin{
+      background-color: white;
+      padding: 20px;
+      margin-top: 150px;
+  }
+  .backLogin{
+      display: none;
+  }
+  .imgLogoNav{
+      width: 150px;
+  }
+  .cardDash{
+      
+      border: 1px solid black;
+      border-radius: 7px;
+      padding: 10px;
+      width: 90%;
+      margin: 7px;
+      float: left;
+     
+  }
+  
+}
+@media (max-width: 575.98px){
+  .cardDash{
+      border: 1px solid black;
+      border-radius: 7px;
+      padding: 10px;
+      width: 90%;
+      margin: 7px;
+      float: left;
+  }
+  .imgLogin1{
+      display: none;
+  }
+  .formLogin{
+      margin-top: 20px;
   }
 }
+
+
+
+/*Breakpoints Tablet*/
+@media (max-width: 991.98px) {
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

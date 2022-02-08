@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+//Librerias
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+//vistas
+import Clientes from './vistas/clientes/Clientes';
+import Vehiculos from './vistas/vehiculos/Vehiculos';
+import Login from './vistas/login/Login';
+import Dashboard from './vistas/Dashboard';
+import Navbar from './vistas/templates/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      {/*Rutas*/}
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Login/>}></Route>
+          <Route exact path="/dashboard" element={<Dashboard/>}></Route>          
+          <Route exact path="/clientes" element={<Clientes/>}></Route>
+          <Route exact path="/vehiculos" element={< Vehiculos/>}></Route>
+          <Route exact path="/navbar" element={< Navbar/>} ></Route>
+                                        
+        </Routes>
+      </Router>
+
     </div>
   );
 }
