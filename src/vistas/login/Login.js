@@ -1,60 +1,68 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 //Librerias
 import axios from "axios";
-//Datos
-import loginInfo from './LoginInfo';
+import { Container, Row, Col, Button, Alert } from "react-bootstrap";
+import Cookies from 'universal-cookie';
 
-const Login = (props) => {
+
+let cookies = new Cookies();
+class Login extends Component {
+  
   //estados
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
-  const [user, user] = useState(null);
-  const {token} = user;
-  
-const containerForm = () => {
-  
-}
-
-const inputUsername = (name, value) => {
-  
-}
-const inputPassword = (name, value) => {
-  
-}
-const envioLogin = (e) => {
-  let datosForm = {username, password}
-  if(datosForm){
-    console.log("Datos", datosForm)
+  state={
+    form:{
+      username: '',
+      password: ''
+    }
   }
-}
-const envioDatos = async (e) => {
-  e.preventDefault();
-  try{
-    const dataLogin = await loginInfo.login({
-      username,
-      password
+  
+  inputInfo = async(e)=>{
+    await this.setState({ 
+      form:{
+        ...this.setState.form,
+        [e.target.name] :e.target.value
+      }
+    });
+  }
+  formLogin = async() => {
+    await  axios.get(`${process.env.REACT_APP_BASEURL}Login/iniciarSesion`, {param: {username: this.state.form.username, password: this.state.form.password}})
+    .then(response => {
+      console.log(response.data)
+      return response.data;
     })
-    setUsername('')
-    setPassword('')
-    setUser(user) 
-  }catch(error){
-    console.log("Ha ocurrido un error")
+    .then(response => {
+      if(response.lenght>0){
+        let respuesta = response[0];
+        cookies.set('id', respuesta.id, {path: "/"})
+        cookies.set('username', respuesta.id, {path: "/"})
+        window.location.href="./dashboard"
+      }else{
+        console.log("error")
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
-
+  componentDidMount() {
+    if(cookies.get('username')){
+        window.location.href="./menu";
+    }
 }
-  return (
-    <div>
-      <div>
-        <div>
-          <div md={8} className="backLogin">
+
+  render(){
+    return (
+      
+        <Container>
+        <Row>
+          <Col md={8} className="backLogin">
            {/* <img
               src="http://172.20.2.4/sistemamodular/login/img/Fachada-Diparvel.jpg"
               className="img-responsive img-fluid imgLogin1"
             /> */}
-          </div>
-          <div md={4} className="containerForm">
-            <form className="formLogin" onSubmit={envioDatos}>
+          </Col>
+          <Col md={4} className="containerForm">
+            <form className="formLogin" onSubmit={this.formLogin}>
               <img
                 src="https://diparvel.com/wp-content/uploads/2021/02/cropped-logo-diparvel-300x84-1.png"
                 alt="Logo Diparvel"
@@ -62,50 +70,51 @@ const envioDatos = async (e) => {
                 className="imgLogo"
               />
               <br />
-              <div className="mb-2">
+              <Col className="mb-2">
                 <input
                   type="text"
                   className="form-control"
                   placeholder="Usuarios"
                   name="username"
                   id="username"
-                  onChange={(e) => inputUsername(e.target.name, e.target.value)}
+                  onChange={this.inputInfo}
                 />
-              </div>
-              <div className="mb-3">
+              </Col>
+              <Col className="mb-3">
                 <input
                   type="password"
                   className="form-control"
                   placeholder="Contraseña"
                   name="password"
                   id="password"
-                  onChange={(e) => inputPassword(e.target.name, e.target.value)}
+                  onChange={this.inputInfo}
+                  
                 />
-              </div>
-              {error && (
-                <div class="alert alert-danger" role="alert">
+              </Col>
+              { /*error && (
+                <Alert class="alert alert-danger text-center" role="alert">
                   El usuario y/o la contraseña son incorrectos{error}
-                </div>
-              )}
-              <div className="d-grid gap-2">
-                <button
+                </Alert>
+              ) */}
+              <Col className="d-grid gap-2">
+                <Button
                   type="submit"
                   id="btnLogin"
                   name="btnLogin"
                   variant="primary"
-                  onClick={envioLogin}
                   size="md"
+                  
                 >
                   Entrar
-                </button>
-              </div>
+                </Button>
+              </Col>
               <br />
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
 
 export default Login;

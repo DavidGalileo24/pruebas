@@ -1,5 +1,6 @@
 import './App.css';
 //Librerias
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //vistas
